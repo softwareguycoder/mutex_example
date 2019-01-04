@@ -18,10 +18,10 @@ void thread_example_1(void)
 	// <https://www.geeksforgeeks.org/multithreading-c-2/>
 
 	pthread_t thread_id;
-	log_info("Before Thread");
+	log_info("thread_example_1: Before Thread");
 	pthread_create(&thread_id, NULL, my_thread_function, NULL);
 	pthread_join(thread_id, NULL);
-	log_info("After Thread");
+	log_info("thread_example_1: After Thread");
 
 	log_info("thread_example1: Done.");
 }
