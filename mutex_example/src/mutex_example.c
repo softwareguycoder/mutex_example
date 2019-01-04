@@ -63,7 +63,7 @@ void thread_example_2(void)
 int main(int argc, char* argv[])
 {
 	// Turn off all logging
-	toggle_debug(FALSE); // @suppress("Symbol is not resolved")
+	//toggle_debug(FALSE); // @suppress("Symbol is not resolved")
 
 	log_info("In main");
 
