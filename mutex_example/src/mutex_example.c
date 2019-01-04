@@ -7,6 +7,7 @@
 
 #include "my_thread.h"
 #include "my_thread_2.h"
+#include "my_thread_3.h"
 
 // Let us create a global variable to change it in threads
 int g = 0;
@@ -58,6 +59,20 @@ void thread_example_2(void)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+// thread_example_3: Example of calling a thread, passing args, and changing
+// global variables
+//
+
+void thread_example_3(void)
+{
+	log_info("In thread_example_3");
+
+	// TODO: Add thread example functionality here
+
+	log_info("thread_example_3: Done.");
+}
+
+///////////////////////////////////////////////////////////////////////////////
 // main function - entry point
 
 int main(int argc, char* argv[])
@@ -78,6 +93,12 @@ int main(int argc, char* argv[])
 	thread_example_2();
 
 	log_info("main: Called thread_example_2.");
+
+	log_info("main: Calling thread_example_3...");
+
+	thread_example_3();
+
+	log_info("main: Called thread_example_3.");
 
 	log_info("main: result = %d", OK);
 
