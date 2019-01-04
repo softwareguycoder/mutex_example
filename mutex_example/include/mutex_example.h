@@ -5,6 +5,6 @@
 #ifndef __MUTEX_EXAMPLE_H__
 #define __MUTEX_EXAMPLE_H__
 
-// TODO: Add program-level APIs and constants here
+void thread_example_1(void);
 
 #endif	//__MUTEX_EXAMPLE_H__
