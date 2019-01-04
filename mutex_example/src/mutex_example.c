@@ -10,7 +10,7 @@
 
 int main(int argc, char* argv[])
 {
-	printf("Hello, world!\n");
+	log_info("Hello, world!\n");
 
 	return OK;
 }
