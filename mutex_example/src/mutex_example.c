@@ -1,4 +1,4 @@
-// MUTEX_EXAMPLE.C: File containing the program entry point and code that is central to the executio of global
+// MUTEX_EXAMPLE.C: File containing the program entry point and code that is central to the execution of global
 // application functionality
 //
 
