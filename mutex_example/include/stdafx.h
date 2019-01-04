@@ -15,4 +15,7 @@
 
 typedef enum { FALSE, TRUE } BOOL;
 
+// Bringing in libraries defined by us
+#include <../../debug_core/debug_core/include/debug_core.h>
+
 #endif //__STDAFX_H__
