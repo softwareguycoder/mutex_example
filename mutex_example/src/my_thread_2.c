@@ -36,12 +36,12 @@ void *my_thread_function_2(void *vargp)
 	// Change both the static and global variables
 	++s; ++g;
 
-	toggle_debug(TRUE); // @suppress("Symbol is not resolved")
+	//toggle_debug(TRUE); // @suppress("Symbol is not resolved")
 
 	// Print the results
 	log_info(MY_THREAD_FUNCTION_2_RESULTS, *pId, ++s, ++g);
 
-	toggle_debug(FALSE); // @suppress("Symbol is not resolved")
+	//toggle_debug(FALSE); // @suppress("Symbol is not resolved")
 
 	log_info(MY_THREAD_FUNCTION_2_DONE);
 
