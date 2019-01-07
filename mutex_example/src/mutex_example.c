@@ -9,8 +9,16 @@
 #include "my_thread_2.h"
 #include "my_thread_3.h"
 
+#define NUM_THREADS_FOR_EXAMPLE_3	2
+
 // Let us create a global variable to change it in threads
 int g = 0;
+
+// Let us create a global counter
+int counter = 0;
+
+// Let us create a global array of thread IDs (for example #3)
+pthread_t thread_ids[NUM_THREADS_FOR_EXAMPLE_3];
 
 ///////////////////////////////////////////////////////////////////////////////
 // thread_example_1: Trivial example of working with a simple thread
@@ -67,7 +75,16 @@ void thread_example_3(void)
 {
 	log_info("In thread_example_3");
 
-	// TODO: Add thread example functionality here
+	for(int i = 0; i < NUM_THREADS_FOR_EXAMPLE_3; i++) {
+		int result = pthread_create(&(thread_ids[i]), NULL, my_thread_function_3, NULL);
+		if (result != 0){		// nonzero result from pthread_create means error
+			log_error("thread_example_3: %s", strerror(result));
+		}
+	}
+
+	for(int i = 0;i < NUM_THREADS_FOR_EXAMPLE_3; i++) {
+		pthread_join(thread_ids[i], NULL);
+	}
 
 	log_info("thread_example_3: Done.");
 }
@@ -82,7 +99,7 @@ int main(int argc, char* argv[])
 
 	log_info("In main");
 
-	log_info("main: Calling thread_example_1...");
+	/*log_info("main: Calling thread_example_1...");
 
 	thread_example_1();
 
@@ -92,7 +109,7 @@ int main(int argc, char* argv[])
 
 	thread_example_2();
 
-	log_info("main: Called thread_example_2.");
+	log_info("main: Called thread_example_2.");*/
 
 	log_info("main: Calling thread_example_3...");
 
