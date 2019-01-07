@@ -26,6 +26,9 @@ void *my_thread_function_3(void *vargp)
 	// Lock the mutex to prevent other threads from running the code below
 	// at the same time we are.
 
+	// NOTE: 'lock' is a global variable we've defined in mutex_example.h
+	// and implemented in mutex_example.c
+
 	log_info("Attempting to get a mutually-exclusive lock...");
 
 	pthread_mutex_lock(&lock);
