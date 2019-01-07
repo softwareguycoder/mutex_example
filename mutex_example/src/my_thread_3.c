@@ -17,6 +17,14 @@ void *my_thread_function_3(void *vargp)
 {
 	log_info("In my_thread_function_3");
 
+	/* Check to ensure that the argument, vargp, is not a NULL pointer.
+	 * If it is, then stop the function and report an error. */
+	if (vargp == NULL) {
+		log_error(MY_THREAD_FUNCTION_3_ERROR_VARGP_NULL);
+		log_info(MY_THREAD_FUNCTION_3_DONE);
+		return NULL;
+	}
+
 	counter+=1;
 
 	log_info("Beginning job #%d...", counter);
