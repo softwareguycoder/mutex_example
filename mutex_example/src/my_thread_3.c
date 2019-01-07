@@ -17,13 +17,22 @@ void *my_thread_function_3(void *vargp)
 {
 	log_info("In my_thread_function_3");
 
-	log_info("Counter before job start = %d", counter);
-
 	/* Check to ensure that the argument, vargp, is not a NULL pointer.
-	 * If it is, then stop the function and report an error. */
+	 * If it is, then warn the user but do not stop the function. */
 	if (vargp == NULL) {
 		log_warning(MY_THREAD_FUNCTION_3_WARN_VARGP_NULL);
 	}
+
+	// Lock the mutex to prevent other threads from running the code below
+	// at the same time we are.
+
+	log_info("Attempting to get a mutually-exclusive lock...");
+
+	pthread_mutex_lock(&lock);
+
+	log_info("Obtained mutually-exclusive lock.");
+
+	log_info("Counter before job start = %d", counter);
 
 	counter+=1;
 
@@ -33,6 +42,12 @@ void *my_thread_function_3(void *vargp)
 	for(unsigned long i = 0; i < LONG_MAX; i++);
 
 	log_info("Job #%d is done.", counter);
+
+	log_info("Releasing the mutually-exclusive lock...");
+
+	pthread_mutex_unlock(&lock);
+
+	log_info("Mutually-exclusive lock released.");
 
 	log_info(MY_THREAD_FUNCTION_3_DONE);
 
