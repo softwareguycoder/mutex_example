@@ -6,7 +6,7 @@
 #define MY_THREAD_FUNCTION_3_DONE "my_thread_function_3: Done."
 #define MY_THREAD_FUNCTION_3_RESULTS "my_thread_function_3:\n\tThread ID: %d\tStatic: %d\tGlobal: %d"
 
-#define MY_THREAD_FUNCTION_3_ERROR_VARGP_NULL "my_thread_function_3: Must pass the address of an int in vargp."
+#define MY_THREAD_FUNCTION_3_WARN_VARGP_NULL "my_thread_function_3: vargp has a NULL value."
 
 #define LONG_MAX  0xFFFFFFFF
 
@@ -17,12 +17,12 @@ void *my_thread_function_3(void *vargp)
 {
 	log_info("In my_thread_function_3");
 
+	log_info("Counter before job start = %d", counter);
+
 	/* Check to ensure that the argument, vargp, is not a NULL pointer.
 	 * If it is, then stop the function and report an error. */
 	if (vargp == NULL) {
-		log_error(MY_THREAD_FUNCTION_3_ERROR_VARGP_NULL);
-		log_info(MY_THREAD_FUNCTION_3_DONE);
-		return NULL;
+		log_warning(MY_THREAD_FUNCTION_3_WARN_VARGP_NULL);
 	}
 
 	counter+=1;
