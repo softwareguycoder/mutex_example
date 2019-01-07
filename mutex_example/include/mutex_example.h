@@ -11,6 +11,9 @@ extern int g;
 // Variable is implemented in the mutex_example.c file
 extern int counter;
 
+// Lock object for the mutex
+extern pthread_mutex_t lock;
+
 void thread_example_1(void);
 void thread_example_2(void);
 void thread_example_3(void);
