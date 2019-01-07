@@ -20,6 +20,9 @@ int counter = 0;
 // Let us create a global array of thread IDs (for example #3)
 pthread_t thread_ids[NUM_THREADS_FOR_EXAMPLE_3];
 
+// Let us create a global for the mutex lock object
+pthread_mutex_t lock;
+
 ///////////////////////////////////////////////////////////////////////////////
 // thread_example_1: Trivial example of working with a simple thread
 
@@ -98,6 +101,14 @@ int main(int argc, char* argv[])
 {
 	log_info("In main");
 
+	// Initialize the mutex lock object
+	if (pthread_mutex_init(&lock, NULL) != OK)
+	{
+		log_error("Failed to initialize mutex.");
+		log_info("main: Done.");
+		return ERROR;
+	}
+
 	/*log_info("main: Calling thread_example_1...");
 
 	thread_example_1();
@@ -117,6 +128,9 @@ int main(int argc, char* argv[])
 	log_info("main: Called thread_example_3.");
 
 	log_info("main: result = %d", OK);
+
+	// Done with the mutex object, so destroy it
+	pthread_mutex_destroy(&lock);
 
 	log_info("main: Done.");
 
