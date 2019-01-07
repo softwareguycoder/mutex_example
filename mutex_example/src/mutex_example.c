@@ -75,6 +75,8 @@ void thread_example_3(void)
 {
 	log_info("In thread_example_3");
 
+	// First, create NUM_THREADS_FOR_EXAMPLE_3 new threads and put their IDs into
+	// the globally-declared array
 	for(int i = 0; i < NUM_THREADS_FOR_EXAMPLE_3; i++) {
 		int result = pthread_create(&(thread_ids[i]), NULL, my_thread_function_3, NULL);
 		if (result != 0){		// nonzero result from pthread_create means error
@@ -94,9 +96,6 @@ void thread_example_3(void)
 
 int main(int argc, char* argv[])
 {
-	// Turn off all logging
-	//toggle_debug(FALSE); // @suppress("Symbol is not resolved")
-
 	log_info("In main");
 
 	/*log_info("main: Calling thread_example_1...");
