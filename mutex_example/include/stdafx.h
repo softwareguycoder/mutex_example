@@ -15,7 +15,15 @@
 #define OK		0		// Code to return to the operating system to indicate successful program termination
 #define ERROR	-1		// Code to return to the operating system to indicate an error condition
 
+#define INVALID_HANDLE_VALUE NULL
+
 typedef enum { FALSE, TRUE } BOOL;
+
+// Handle to a mutex
+typedef pthread_mutex_t *HMUTEX;
+
+// All handles are pointers, so define a constant
+// INVALID_HANDLE_VALUE to be the same as NULL
 
 // Bringing in libraries defined by us
 #include <../../debug_core/debug_core/include/debug_core.h>
