@@ -33,23 +33,23 @@ void *my_thread_function_3(void *vargp)
 	log_info("Attempting to get a mutually-exclusive lock...");
 
 	LockMutex(hGlobalMutex);
+	{
+		log_info("Obtained mutually-exclusive lock.");
 
-	log_info("Obtained mutually-exclusive lock.");
+		log_info("Counter before job start = %d", counter);
 
-	log_info("Counter before job start = %d", counter);
+		counter+=1;
 
-	counter+=1;
+		log_info("Beginning job #%d...", counter);
 
-	log_info("Beginning job #%d...", counter);
+		/* This for loop is just here to make this thread last a long time */
+		for(unsigned long i = 0; i < LONG_MAX; i++);
 
-	/* This for loop is just here to make this thread last a long time */
-	for(unsigned long i = 0; i < LONG_MAX; i++);
+		log_info("Job #%d is done.", counter);
 
-	log_info("Job #%d is done.", counter);
-
-	log_info("Releasing the mutually-exclusive lock...");
-
-	pthread_mutex_unlock(&lock);
+		log_info("Releasing the mutually-exclusive lock...");
+	}
+	UnlockMutex(hGlobalMutex);
 
 	log_info("Mutually-exclusive lock released.");
 
