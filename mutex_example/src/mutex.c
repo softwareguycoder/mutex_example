@@ -16,7 +16,9 @@ HMUTEX CreateMutex()
 		return INVALID_HANDLE_VALUE;
 	}
 
-	if (OK != pthread_mutex_init(pMutex))
+	// Call pthread_mutex_init.  This version of CreateMutex just passes a
+	// mutex handle for the function to initialize with NULL for the attributes.
+	if (OK != pthread_mutex_init(pMutex, NULL))
 	{
 		return INVALID_HANDLE_VALUE;
 	}
@@ -63,7 +65,7 @@ void DestroyMutex(HMUTEX hMutex)
 {
 	if (INVALID_HANDLE_VALUE == hMutex)
 	{	
-		// If we have an invalid handle, then there is nothing to do.
+		// If we have an invalid handle (i.e., NULL pointer), then there is nothing to do.
 		return;
 	}
 
