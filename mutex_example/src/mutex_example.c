@@ -22,6 +22,7 @@ pthread_t thread_ids[NUM_THREADS_FOR_EXAMPLE_3];
 
 // Let us create a global for the mutex lock object
 pthread_mutex_t lock;
+HMUTEX hGlobalMutex;	// global mutex handle
 
 ///////////////////////////////////////////////////////////////////////////////
 // thread_example_1: Trivial example of working with a simple thread
