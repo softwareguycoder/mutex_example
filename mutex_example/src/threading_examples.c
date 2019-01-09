@@ -20,7 +20,7 @@ void thread_example_1(void) {
 
 	log_info("thread_example_1: Attempting to create thread...");
 
-	int nResult = pthread_create(&thread_id, NULL, my_thread_function, NULL);
+	int nResult = pthread_create(&thread_id, NULL, my_thread_function_1, NULL);
 	if (OK != nResult) {
 		log_error("thread_example_1: Failed to create thread. %s", strerror(nResult));
 

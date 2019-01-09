@@ -8,7 +8,7 @@
 
 // A normal C function that is executed as a thread
 // when its name is specified in pthread_create()
-void *my_thread_function(void *vargp)
+void *my_thread_function_1(void *vargp)
 {
 	log_info("In my_thread_function");
 
