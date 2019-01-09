@@ -155,7 +155,7 @@ void LockMutex(HMUTEX hMutex) {
 		return;
 	}
 
-	log_info("LockMutex: Successfully obtained a lock on the mutex.");
+	log_info("LockMutex: Obtained a lock on the mutex.");
 
 	log_info("LockMutex: Done.");
 }
