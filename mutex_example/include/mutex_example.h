@@ -12,7 +12,7 @@ extern int g;
 extern int counter;
 
 // Lock object for the mutex
-extern pthread_mutex_t lock;
+//extern pthread_mutex_t lock;
 
 // Lock object for the global mutex
 extern HMUTEX hGlobalMutex;
