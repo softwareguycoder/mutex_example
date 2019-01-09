@@ -12,9 +12,6 @@
 #include <string.h>
 #include <time.h>
 
-// Handle to a mutex
-typedef pthread_mutex_t *HMUTEX;
-
 // Exit codes
 #define OK		0		// Code to return to the operating system to indicate successful program termination
 #define ERROR	-1		// Code to return to the operating system to indicate an error condition

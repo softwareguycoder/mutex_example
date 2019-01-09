@@ -8,7 +8,7 @@
 #ifndef __THREADING_EXAMPLES_H__
 #define __THREADING_EXAMPLES_H__
 
-#include <my_thread_1.h>
+#include "my_thread_1.h"
 #include "my_thread_2.h"
 #include "my_thread_3.h"
 

@@ -5,6 +5,8 @@
 #ifndef __MUTEX_EXAMPLE_H__
 #define __MUTEX_EXAMPLE_H__
 
+#include "mutex.h"
+
 // Variable is implemented in the mutex_example.c file
 extern int g;
 

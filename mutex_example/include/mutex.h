@@ -8,7 +8,8 @@
 #ifndef __MUTEX_H__
 #define __MUTEX_H__
 
-#include "stdafx.h"
+// Handle to a mutex
+typedef pthread_mutex_t *HMUTEX;
 
 // API for mutex use
 
