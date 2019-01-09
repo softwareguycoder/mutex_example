@@ -188,7 +188,7 @@ void UnlockMutex(HMUTEX hMutex) {
 		return;
 	}
 
-	log_info("UnlockMutex: The lock has been released successfully.");
+	log_info("UnlockMutex: Lock released successfully.");
 
 	// Done with execution.
 
