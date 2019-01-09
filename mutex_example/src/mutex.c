@@ -98,6 +98,7 @@ HMUTEX CreateMutex() {
 
 /**
  * @brief Releases resources associated with the specified mutex back to the operating system.
+ * @remarks NOTE: For every call to CreateMutex, there must also be a call to DestroyMutex.
  */
 void DestroyMutex(HMUTEX hMutex) {
 	log_info("In DestroyMutex");
