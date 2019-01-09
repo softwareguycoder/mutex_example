@@ -7,7 +7,8 @@
 #include "threading_examples.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-// thread_example_1: Trivial example of working with a simple thread
+// thread_example_1: Driver function for the trivial example of working with a
+// simple and synchronous thread
 
 void thread_example_1(void) {
 	log_info("In thread_example_1");
