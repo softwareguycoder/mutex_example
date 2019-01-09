@@ -18,6 +18,8 @@
 
 #define INVALID_HANDLE_VALUE NULL
 
+#define NUM_THREADS_FOR_EXAMPLE_3	2
+
 // Handle to a mutex
 typedef pthread_mutex_t *HMUTEX;
 

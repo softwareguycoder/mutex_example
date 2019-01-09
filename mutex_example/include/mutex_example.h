@@ -11,14 +11,10 @@ extern int g;
 // Variable is implemented in the mutex_example.c file
 extern int counter;
 
-// Lock object for the mutex
-//extern pthread_mutex_t lock;
-
 // Lock object for the global mutex
 extern HMUTEX hGlobalMutex;
 
-void thread_example_1(void);
-void thread_example_2(void);
-void thread_example_3(void);
+// Let us create a global array of thread IDs (for example #3)
+extern pthread_t thread_ids[NUM_THREADS_FOR_EXAMPLE_3];
 
 #endif	//__MUTEX_EXAMPLE_H__
