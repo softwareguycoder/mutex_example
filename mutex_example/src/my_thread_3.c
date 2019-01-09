@@ -2,7 +2,7 @@
 #include "mutex_example.h"
 
 #include "my_thread_3.h"
-#incluide "mutex.h"
+#include "mutex.h"
 
 #define MY_THREAD_FUNCTION_3_DONE "my_thread_function_3: Done."
 #define MY_THREAD_FUNCTION_3_RESULTS "my_thread_function_3:\n\tThread ID: %d\tStatic: %d\tGlobal: %d"
