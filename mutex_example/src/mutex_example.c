@@ -79,7 +79,7 @@ void thread_example_3(void) {
 	log_info("In thread_example_3");
 
 	log_info("thread_example_3: Attempting to create %d threads...",
-	NUM_THREADS_FOR_EXAMPLE_3);
+			NUM_THREADS_FOR_EXAMPLE_3);
 
 	// First, create NUM_THREADS_FOR_EXAMPLE_3 new threads and put their IDs into
 	// the globally-declared array
