@@ -15,7 +15,7 @@ void FreeMutex(HMUTEX hMutex) {
 
 	if (INVALID_HANDLE_VALUE == hMutex) {
 		log_warning(
-				"The mutex handle passed has a NULL value; assuming it's already been deallocated.");
+				"FreeMutex: The mutex handle passed has an invalid value; assuming it's already been deallocated.");
 
 		log_info("FreeMutex: Done.");
 
@@ -125,11 +125,30 @@ void DestroyMutex(HMUTEX hMutex) {
  * to obtain a lock for.
  */
 void LockMutex(HMUTEX hMutex) {
+	log_info("In LockMutex");
+
+	log_info("LockMutex: Checking whether the mutex handle passed is valid...");
+
 	if (hMutex == INVALID_HANDLE_VALUE) {
+		log_error("LockMutex: The mutex handle passed has an invalid value.  Call CreateMutex first.");
+
+		log_info("LockMutex: Done.");
+
 		return;
 	}
 
-	pthread_mutex_lock(hMutex);
+	log_info("LockMutex: The mutex handle is valid.  Calling the pthread_mutex_lock API...");
+
+	int nResult = pthread_mutex_lock(hMutex);
+	if (OK != nResult) {
+		log_error("LockMutex: Failed to lock the mutex provided. %s", strerror(nResult));
+
+		log_info("LockMutex: Done.");
+
+		return;
+	}
+
+	log_info("LockMutex: Done.");
 }
 
 /**
@@ -139,10 +158,31 @@ void LockMutex(HMUTEX hMutex) {
  * to release the lock on.
  */
 void UnlockMutex(HMUTEX hMutex) {
+	log_info("In UnlockMutex");
+
+	log_info("UnlockMutex: Checking whether the mutex handle passed is valid...");
+
 	if (hMutex == INVALID_HANDLE_VALUE) {
 		return;
 	}
 
-	pthread_mutex_unlock(hMutex);
+	log_info("UnlockMutex: The mutex handle passed is a valid value.  Attempting to release the lock on it...");
+
+	// Attempt to unlock the mutex provided and report to the user if the attempt does not work.
+
+	int nResult = pthread_mutex_unlock((pthread_mutex_t*)hMutex);
+	if (OK != nResult){
+		log_error("UnlockMutex: Failed to unlock the mutex provided. %s", strerror(nResult));
+
+		log_info("UnlockMutex: Done.");
+
+		return;
+	}
+
+	log_info("UnlockMutex: The lock has been released successfully.");
+
+	// Done with execution.
+
+	log_info("UnlockMutex: Done.");
 }
 
