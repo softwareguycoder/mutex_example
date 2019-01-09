@@ -8,6 +8,9 @@
 #ifndef __MUTEX_H__
 #define __MUTEX_H__
 
+#include <unistd.h>  //Header file for sleep(). man 3 sleep for details.
+#include <pthread.h>
+
 // Handle to a mutex
 typedef pthread_mutex_t *HMUTEX;
 
