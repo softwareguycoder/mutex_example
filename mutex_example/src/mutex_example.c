@@ -7,8 +7,6 @@
 
 #include "threading_examples.h"
 
-#include "mutex.h"
-
 // Let us create a global variable to change it in threads
 int g = 0;
 
