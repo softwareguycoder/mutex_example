@@ -13,6 +13,12 @@
 // API for mutex use
 
 /**
+ * @brief Creates a mutex object, and returns a handle to it.  Returns INVALID_HANDLE_VALUE
+   if an error occurred.
+ */
+HMUTEX CreateMutex();
+
+/**
  * \brief Locks the mutex with the handle specified.  Does nothing if the handle
  * is INVALID_HANDLE_VALUE.
  *
@@ -29,5 +35,9 @@ void LockMutex(HMUTEX hMutex);
  */
 void UnlockMutex(HMUTEX hMutex);
 
+/**
+ * @brief Releases resources associated with the specified mutex back to the operating system.
+ */
+void DestroyMutex(HMUTEX hMutex);
 
 #endif /* __MUTEX_H__ */
