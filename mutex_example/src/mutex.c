@@ -24,7 +24,7 @@ void FreeMutex(HMUTEX hMutex) {
 	}
 
 	log_info(
-			"FreeMutex: The mutex handle passed is valid.  Proceeding to free it...");
+			"FreeMutex: The mutex handle passed is valid.  Freeing the memory...");
 
 	// The HMUTEX handle type is just a typedef of pthread_mutex_t*
 	// However, to work with the pthread functions, we need to view it
