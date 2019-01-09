@@ -157,7 +157,7 @@ void LockMutex(HMUTEX hMutex) {
 	}
 
 	log_info(
-			"LockMutex: The mutex handle is valid.  Calling the pthread_mutex_lock API...");
+			"LockMutex: The mutex handle is valid.  Attempting to get a lock on it...");
 
 	int nResult = pthread_mutex_lock(hMutex);
 	if (OK != nResult) {
