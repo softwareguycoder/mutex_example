@@ -116,7 +116,7 @@ void DestroyMutex(HMUTEX hMutex) {
 	log_info("DestroyMutex: The mutex handle passed is still a valid value.");
 
 	log_info(
-			"DestroyMutex: Releasing the mutex's resources back to the operating system...");
+			"DestroyMutex: Attempting to release the mutex's resources back to the operating system...");
 
 	int nResult = pthread_mutex_destroy((pthread_mutex_t*) hMutex);
 	if (OK != nResult) {
