@@ -135,8 +135,8 @@ int main(int argc, char* argv[])
 
 	log_info("main: result = %d", OK);
 
-	// Done with the mutex object, so destroy it
-	pthread_mutex_destroy(&lock);
+	// Done with the mutex object, so destroy and de-allocate it.
+	DestroyMutex(hGlobalMutex);
 
 	log_info("main: Done.");
 
