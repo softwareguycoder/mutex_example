@@ -163,7 +163,11 @@ int main(int argc, char* argv[]) {
 
 	log_info("main: Seeding the random number generator...");
 
-	srand((unsigned int)time(NULL));
+	unsigned int nResult = (unsigned int)time(NULL);
+
+	srand(nResult);
+
+	log_info("main: Random number generator seeded with value %u.", nResult);
 
 	log_info("main: Attempting to initialize global mutex object...");
 
