@@ -14,7 +14,7 @@ void FreeMutex(HMUTEX hMutex) {
 	log_info("FreeMutex: Checking whether the mutex handle passed is valid...");
 
 	if (INVALID_HANDLE_VALUE == hMutex) {
-		log_error(
+		log_warning(
 				"The mutex handle passed has a NULL value; assuming it's already been deallocated.");
 
 		log_info("FreeMutex: Done.");
@@ -45,22 +45,45 @@ void FreeMutex(HMUTEX hMutex) {
  if an error occurred.
  */
 HMUTEX CreateMutex() {
+	log_info("In CreateMutex");
+
 	pthread_mutex_t* pMutex = (pthread_mutex_t*) malloc(
 			sizeof(pthread_mutex_t));
 	if (pMutex == NULL) {
+		log_error(
+				"CreateMutex: Memory allocation of pthread_mutex_t structure failed.");
+
+		log_info("CreateMutex: Done.");
+
 		return INVALID_HANDLE_VALUE;
 	}
 
 	// Call pthread_mutex_init.  This version of CreateMutex just passes a
 	// mutex handle for the function to initialize with NULL for the attributes.
-	if (OK != pthread_mutex_init(pMutex, NULL)) {
+	int nResult = pthread_mutex_init(pMutex, NULL);
+	if (OK != nResult) {
+		log_error("CreateMutex: Failed to allocate mutex. %s",
+				strerror(nResult));
+
+		log_info(
+				"CreateMutex: Attempting to release memory occupied by the mutex handle...");
+
 		// Cleanup the mutex handle if necessary
 		if (pMutex != NULL) {
 			FreeMutex((HMUTEX) pMutex);
 		}
 
+		log_info(
+				"CreateMutex: Resources consumed by the mutex handle have been released baack to the operating system.");
+
+		log_info("CreateMutex: Done.");
+
 		return INVALID_HANDLE_VALUE;
 	}
+
+	log_debug("CreateMutex: Successfully created mutex with handle at address %p.", pMutex);
+
+	log_info("CreateMutex: Done.");
 
 	return (HMUTEX) pMutex;	// a HMUTEX is a typedef of pthread_mutex_t*
 }
