@@ -92,14 +92,30 @@ HMUTEX CreateMutex() {
  * @brief Releases resources associated with the specified mutex back to the operating system.
  */
 void DestroyMutex(HMUTEX hMutex) {
+	log_info("In DestroyMutex");
+
+	log_info("DestroyMutex: Checking whether the mutex handle passed is valid...");
+
 	if (INVALID_HANDLE_VALUE == hMutex) {
+		log_warning("DestroyMutex: The mutex handle passed is already set to an invalid value.  Nothing to do.");
+
+		log_info("DestroyMutex: Done.");
+
 		// If we have an invalid handle (i.e., NULL pointer), then there is nothing to do.
 		return;
 	}
 
+	log_info("DestroyMutex: The mutex handle passed is still a valid value.");
+
+	log_info("DestroyMutex: Releasing the mutex's resources back to the operating system...");
+
+	/* Technically, we should check the return value of the pthread_mutex_destroy function,
+	 * however, we really do not care whether it succeeds or fails. */
 	pthread_mutex_destroy((pthread_mutex_t*) hMutex);
 
 	FreeMutex(hMutex);
+
+	log_info("DestroyMutex: Done.");
 }
 
 /**
