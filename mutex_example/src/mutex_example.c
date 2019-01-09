@@ -102,11 +102,16 @@ int main(int argc, char* argv[])
 {
 	log_info("In main");
 
-	// Initialize the mutex lock object
-	if (pthread_mutex_init(&lock, NULL) != OK)
+	// Initialize the mutex lock object ( allocate a new one
+	// in memory if necessary ) and then attempt to get a handle
+	// to it.
+
+	hGlobalMutex = CreateMutex();
+	if (INVALID_HANDLE_VALUE == hGlobalMutex)
 	{
 		log_error("Failed to initialize mutex.");
 		log_info("main: Done.");
+
 		return ERROR;
 	}
 
