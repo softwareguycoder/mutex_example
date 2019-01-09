@@ -123,7 +123,7 @@ void thread_example_3(void) {
 			return;
 		}
 
-		log_info("thread_example_3: Successfully launched thread #%d.",
+		log_info("thread_example_3: Launched thread #%d.",
 				nCurrentThread);
 	}
 
