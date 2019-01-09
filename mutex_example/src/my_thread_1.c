@@ -10,14 +10,13 @@
 // when its name is specified in pthread_create()
 void *my_thread_function_1(void *vargp)
 {
-	log_info("In my_thread_function");
+	log_info("In my_thread_function_1");
 
     sleep(1);
 
-    log_info("my_thread_function: Hello, world!");
-    log_info("my_thread_function: Yay the thread works!");
-
-    log_info("my_thread_function: Done.");
+    log_info("my_thread_function_1: Hello, world!");
+    log_info("my_thread_function_1: Yay the thread works!");
+    log_info("my_thread_function_1: Done.");
 
     return NULL;
 }
