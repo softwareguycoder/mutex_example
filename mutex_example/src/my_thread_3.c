@@ -2,6 +2,7 @@
 #include "mutex_example.h"
 
 #include "my_thread_3.h"
+#incluide "mutex.h"
 
 #define MY_THREAD_FUNCTION_3_DONE "my_thread_function_3: Done."
 #define MY_THREAD_FUNCTION_3_RESULTS "my_thread_function_3:\n\tThread ID: %d\tStatic: %d\tGlobal: %d"
@@ -31,7 +32,7 @@ void *my_thread_function_3(void *vargp)
 
 	log_info("Attempting to get a mutually-exclusive lock...");
 
-	pthread_mutex_lock(&lock);
+	LockMutex(hGlobalMutex);
 
 	log_info("Obtained mutually-exclusive lock.");
 
