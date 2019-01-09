@@ -1,7 +1,7 @@
+#include <my_thread_1.h>
 #include "stdafx.h"
 #include "mutex_example.h"
 
-#include "my_thread.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 // my_thread_function: Defines the operations for the thread
