@@ -64,10 +64,12 @@ void thread_example_2(void) {
 	pthread_t tid;
 
 	for (int i = 0; i < NUM_THREADS; i++) {
-		log_info("thread_example_2: Attempting to create thread #%d", i + 1);
+		int nCurrentThread = i + 1;
+
+		log_info("thread_example_2: Attempting to create thread #%d", nCurrentThread);
 		pthread_create(&tid, NULL, my_thread_function_2, (void*) &tid);
 		pthread_join(tid, NULL);
-		log_info("thread_example_2: After Thread #%d", i + 1);
+		log_info("thread_example_2: After Thread #%d", nCurrentThread);
 	}
 
 	log_info("thread_example_2: Done.");
