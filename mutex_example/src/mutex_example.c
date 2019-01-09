@@ -58,10 +58,13 @@ void thread_example_2(void) {
 	// Let us create three threads
 	const int NUM_THREADS = 3;
 
+	log_info("thread_example_2: Attempting to create %d threads...",
+			NUM_THREADS);
+
 	pthread_t tid;
 
 	for (int i = 0; i < NUM_THREADS; i++) {
-		log_info("thread_example_2: Before Thread #%d", i + 1);
+		log_info("thread_example_2: Attempting to create thread #%d", i + 1);
 		pthread_create(&tid, NULL, my_thread_function_2, (void*) &tid);
 		pthread_join(tid, NULL);
 		log_info("thread_example_2: After Thread #%d", i + 1);
@@ -79,7 +82,7 @@ void thread_example_3(void) {
 	log_info("In thread_example_3");
 
 	log_info("thread_example_3: Attempting to create %d threads...",
-			NUM_THREADS_FOR_EXAMPLE_3);
+	NUM_THREADS_FOR_EXAMPLE_3);
 
 	// First, create NUM_THREADS_FOR_EXAMPLE_3 new threads and put their IDs into
 	// the globally-declared array
@@ -123,8 +126,7 @@ void thread_example_3(void) {
 			return;
 		}
 
-		log_info("thread_example_3: Launched thread #%d.",
-				nCurrentThread);
+		log_info("thread_example_3: Launched thread #%d.", nCurrentThread);
 	}
 
 	log_info("thread_example_3: Done.");
@@ -162,13 +164,13 @@ int main(int argc, char* argv[]) {
 
 	 thread_example_1();
 
-	 log_info("main: Called thread_example_1.");
+	 log_info("main: Called thread_example_1.");*/
 
-	 log_info("main: Calling thread_example_2...");
+	log_info("main: Calling thread_example_2...");
 
-	 thread_example_2();
+	thread_example_2();
 
-	 log_info("main: Called thread_example_2.");*/
+	log_info("main: Called thread_example_2.");
 
 	log_info("main: Calling thread_example_3...");
 
