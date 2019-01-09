@@ -16,12 +16,35 @@ void thread_example_1(void) {
 	// <https://www.geeksforgeeks.org/multithreading-c-2/>
 
 	pthread_t thread_id;
-	log_info("thread_example_1: Before Thread");
-	pthread_create(&thread_id, NULL, my_thread_function, NULL);
-	pthread_join(thread_id, NULL);
-	log_info("thread_example_1: After Thread");
 
-	log_info("thread_example1: Done.");
+	log_info("thread_example_1: Attempting to create thread...");
+
+	int nResult = pthread_create(&thread_id, NULL, my_thread_function, NULL);
+	if (OK != nResult) {
+		log_error("thread_example_1: Failed to create thread. %s", strerror(nResult));
+
+		log_info("thread_example_1: Done.");
+
+		return;
+	}
+
+	log_info("thread_example_1: Successfully created thread with ID %lu.", thread_id);
+
+	log_info("thread_example_1: Attempting to join thread with ID %lu...", thread_id);
+
+	nResult = pthread_join(thread_id, NULL);
+	if (OK != nResult) {
+		log_error("thread_example_1: Failed to join thread with ID %lu. %s", thread_id,
+				strerror(nResult));
+
+		log_info("thread_example_1: Done.");
+
+		return;
+	}
+
+	log_info("thread_example_1: Thread with ID %lu terminated successfully.", thread_id);
+
+	log_info("thread_example_1: Done.");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
