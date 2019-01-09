@@ -17,8 +17,6 @@
 
 #define INVALID_HANDLE_VALUE NULL
 
-typedef enum { FALSE, TRUE } BOOL;
-
 // Handle to a mutex
 typedef pthread_mutex_t *HMUTEX;
 

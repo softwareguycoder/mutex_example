@@ -9,6 +9,8 @@
 #include "my_thread_2.h"
 #include "my_thread_3.h"
 
+#include "mutex.h"
+
 #define NUM_THREADS_FOR_EXAMPLE_3	2
 
 // Let us create a global variable to change it in threads
