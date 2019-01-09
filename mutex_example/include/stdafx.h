@@ -10,6 +10,7 @@
 #include <unistd.h>  //Header file for sleep(). man 3 sleep for details.
 #include <pthread.h>
 #include <string.h>
+#include <time.h>
 
 // Exit codes
 #define OK		0		// Code to return to the operating system to indicate successful program termination

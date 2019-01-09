@@ -88,6 +88,8 @@ void thread_example_2(void) {
 			log_info("thread_example_2: Done.");
 		}
 
+		tid = (unsigned long int)rand();	// RANDOMIZE the thread ID before creating the next thread
+
 		log_info("thread_example_2: Thread #%d has terminated.", nCurrentThread);
 	}
 
@@ -158,6 +160,10 @@ void thread_example_3(void) {
 
 int main(int argc, char* argv[]) {
 	log_info("In main");
+
+	log_info("main: Seeding the random number generator...");
+
+	srand((unsigned int)time(NULL));
 
 	log_info("main: Attempting to initialize global mutex object...");
 
