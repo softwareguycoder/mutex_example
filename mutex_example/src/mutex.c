@@ -47,6 +47,8 @@ void FreeMutex(HMUTEX hMutex) {
 HMUTEX CreateMutex() {
 	log_info("In CreateMutex");
 
+	log_info("CreateMutex: Attempting to allocate system memory for mutex handle...");
+
 	pthread_mutex_t* pMutex = (pthread_mutex_t*) malloc(
 			sizeof(pthread_mutex_t));
 	if (pMutex == NULL) {
@@ -57,6 +59,10 @@ HMUTEX CreateMutex() {
 
 		return INVALID_HANDLE_VALUE;
 	}
+
+	log_debug("CreateMutex: %d B of memory allocated.", sizeof(pthread_mutex_t));
+
+	log_info("CreateMutex: Attempting to initialize mutex...");
 
 	// Call pthread_mutex_init.  This version of CreateMutex just passes a
 	// mutex handle for the function to initialize with NULL for the attributes.
