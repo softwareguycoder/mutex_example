@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
 
 	log_info("main: Seeding the random number generator...");
 
-	unsigned int nResult = (unsigned int)time(NULL);
+	unsigned int nResult = (unsigned int) time(NULL);
 
 	srand(nResult);
 
@@ -58,11 +58,11 @@ int main(int argc, char* argv[]) {
 	log_info(
 			"main: Global mutex handle allocated and initialized successfully.");
 
-	/*log_info("main: Calling thread_example_1...");
+	log_info("main: Calling thread_example_1...");
 
-	 thread_example_1();
+	thread_example_1();
 
-	 log_info("main: Called thread_example_1.");*/
+	log_info("main: Called thread_example_1.");
 
 	log_info("main: Calling thread_example_2...");
 
@@ -76,7 +76,8 @@ int main(int argc, char* argv[]) {
 
 	log_info("main: Called thread_example_3.");
 
-	log_info("main: Attempting to release resources consumed by the global mutex object back to the operating system...");
+	log_info(
+			"main: Attempting to release resources consumed by the global mutex object back to the operating system...");
 
 	// Done with the mutex object, so destroy and de-allocate it.
 	DestroyMutex(hGlobalMutex);
