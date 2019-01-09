@@ -67,9 +67,28 @@ void thread_example_2(void) {
 		int nCurrentThread = i + 1;
 
 		log_info("thread_example_2: Attempting to create thread #%d", nCurrentThread);
-		pthread_create(&tid, NULL, my_thread_function_2, (void*) &tid);
-		pthread_join(tid, NULL);
-		log_info("thread_example_2: After Thread #%d", nCurrentThread);
+
+		int nResult = pthread_create(&tid, NULL, my_thread_function_2, (void*) &tid);
+		if (OK != nResult) {
+			log_error("thread_example_2: Failed to create thread #%d. %s", nCurrentThread, strerror(nResult));
+
+			log_info("thread_example_2: Done.");
+
+			return;
+		}
+
+		log_info("thread_example_2: Created thread #%d with thread ID %lu.", nCurrentThread, tid);
+
+		log_info("thread_example_2: Attempting to join thread #%d...", nCurrentThread);
+
+		nResult = pthread_join(tid, NULL);
+		if (OK != nResult) {
+			log_error("thread_example_2: Failed to join thread #%d. %s", nCurrentThread, strerror(nResult));
+
+			log_info("thread_example_2: Done.");
+		}
+
+		log_info("thread_example_2: Thread #%d has terminated.", nCurrentThread);
 	}
 
 	log_info("thread_example_2: Done.");
