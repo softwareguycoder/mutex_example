@@ -29,8 +29,7 @@ HMUTEX hGlobalMutex;	// global mutex handle
 ///////////////////////////////////////////////////////////////////////////////
 // thread_example_1: Trivial example of working with a simple thread
 
-void thread_example_1(void)
-{
+void thread_example_1(void) {
 	log_info("In thread_example_1");
 
 	// Multithreading trial - code from
@@ -50,8 +49,7 @@ void thread_example_1(void)
 // global variables
 //
 
-void thread_example_2(void)
-{
+void thread_example_2(void) {
 	log_info("In thread_example_2");
 
 	// Multithreading trial - code from
@@ -62,11 +60,11 @@ void thread_example_2(void)
 
 	pthread_t tid;
 
-	for(int i = 0; i < NUM_THREADS; i++) {
-		log_info("thread_example_2: Before Thread #%d", i+1);
-		pthread_create(&tid, NULL, my_thread_function_2, (void*)&tid);
+	for (int i = 0; i < NUM_THREADS; i++) {
+		log_info("thread_example_2: Before Thread #%d", i + 1);
+		pthread_create(&tid, NULL, my_thread_function_2, (void*) &tid);
 		pthread_join(tid, NULL);
-		log_info("thread_example_2: After Thread #%d", i+1);
+		log_info("thread_example_2: After Thread #%d", i + 1);
 	}
 
 	log_info("thread_example_2: Done.");
@@ -77,21 +75,56 @@ void thread_example_2(void)
 // global variables
 //
 
-void thread_example_3(void)
-{
+void thread_example_3(void) {
 	log_info("In thread_example_3");
+
+	log_info("thread_example_3: Attempting to create %d threads...",
+	NUM_THREADS_FOR_EXAMPLE_3);
 
 	// First, create NUM_THREADS_FOR_EXAMPLE_3 new threads and put their IDs into
 	// the globally-declared array
-	for(int i = 0; i < NUM_THREADS_FOR_EXAMPLE_3; i++) {
-		int result = pthread_create(&(thread_ids[i]), NULL, my_thread_function_3, NULL);
-		if (result != 0){		// nonzero result from pthread_create means error
-			log_error("thread_example_3: %s", strerror(result));
+	for (int i = 0; i < NUM_THREADS_FOR_EXAMPLE_3; i++) {
+		int nCurrentThread = i + 1;
+		log_info("thread_example_3: Attempting to create thread #%d...",
+				nCurrentThread);
+
+		int nResult = pthread_create(&(thread_ids[i]), NULL,
+				my_thread_function_3, NULL);
+		if (OK != nResult) {// nonzero result from pthread_create means error
+			log_error("thread_example_3: Failed to create thread #%d. %s",
+					nCurrentThread, strerror(nResult));
+
+			log_info("thread_example_3: Done.");
+
+			/* Stop here as something went wrong. */
+			return;
 		}
+
+		log_info(
+				"thread_example_3: Thread #%d has been created.  Thread ID is %lu.",
+				nCurrentThread, thread_ids[i]);
 	}
 
-	for(int i = 0;i < NUM_THREADS_FOR_EXAMPLE_3; i++) {
-		pthread_join(thread_ids[i], NULL);
+	log_info(
+			"thread_example_3: Finished creating threads.  Launching each thread...");
+
+	for (int i = 0; i < NUM_THREADS_FOR_EXAMPLE_3; i++) {
+		int nCurrentThread = i + 1;
+		log_info("thread_example_3: Attempting to launch thread #%d...",
+				nCurrentThread);
+
+		int nResult = pthread_join(thread_ids[i], NULL);
+		if (OK != nResult) {
+			log_error("thread_example_3: Failed to launch thread #%d. %s",
+					nCurrentThread, strerror(nResult));
+
+			log_info("thread_example_3: Done.");
+
+			return;
+		}
+
+		log_info("thread_example_3: Successfully launched thread #%d.",
+				nCurrentThread);
 	}
 
 	log_info("thread_example_3: Done.");
@@ -100,34 +133,42 @@ void thread_example_3(void)
 ///////////////////////////////////////////////////////////////////////////////
 // main function - entry point
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
 	log_info("In main");
+
+	log_info("main: Attempting to initialize global mutex object...");
 
 	// Initialize the mutex lock object ( allocate a new one
 	// in memory if necessary ) and then attempt to get a handle
 	// to it.
 
 	hGlobalMutex = CreateMutex();
-	if (INVALID_HANDLE_VALUE == hGlobalMutex)
-	{
+
+	log_info(
+			"main: Checking whether mutex handle was allocated and initialized successfully...");
+
+	if (INVALID_HANDLE_VALUE == hGlobalMutex) {
 		log_error("Failed to initialize mutex.");
+
 		log_info("main: Done.");
 
 		return ERROR;
 	}
 
+	log_info(
+			"main: Global mutex handle allocated and initialized successfully.");
+
 	/*log_info("main: Calling thread_example_1...");
 
-	thread_example_1();
+	 thread_example_1();
 
-	log_info("main: Called thread_example_1.");
+	 log_info("main: Called thread_example_1.");
 
-	log_info("main: Calling thread_example_2...");
+	 log_info("main: Calling thread_example_2...");
 
-	thread_example_2();
+	 thread_example_2();
 
-	log_info("main: Called thread_example_2.");*/
+	 log_info("main: Called thread_example_2.");*/
 
 	log_info("main: Calling thread_example_3...");
 
