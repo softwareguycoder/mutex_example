@@ -189,6 +189,10 @@ void UnlockMutex(HMUTEX hMutex) {
 			"UnlockMutex: Checking whether the mutex handle passed is valid...");
 
 	if (hMutex == INVALID_HANDLE_VALUE) {
+		log_error("UnlockMutex: The mutex handle is invalid.  Nothing to do.");
+
+		log_info("UnlockMutex: Done.");
+
 		return;
 	}
 
