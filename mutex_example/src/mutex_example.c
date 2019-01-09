@@ -199,10 +199,14 @@ int main(int argc, char* argv[]) {
 
 	log_info("main: Called thread_example_3.");
 
-	log_info("main: result = %d", OK);
+	log_info("main: Attempting to release resources consumed by the global mutex object back to the operating system...");
 
 	// Done with the mutex object, so destroy and de-allocate it.
 	DestroyMutex(hGlobalMutex);
+
+	log_info("main: Global mutex resources have been released.");
+
+	log_info("main: result = %d", OK);
 
 	log_info("main: Done.");
 
