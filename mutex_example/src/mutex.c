@@ -109,9 +109,16 @@ void DestroyMutex(HMUTEX hMutex) {
 
 	log_info("DestroyMutex: Releasing the mutex's resources back to the operating system...");
 
-	/* Technically, we should check the return value of the pthread_mutex_destroy function,
-	 * however, we really do not care whether it succeeds or fails. */
-	pthread_mutex_destroy((pthread_mutex_t*) hMutex);
+	int nResult = pthread_mutex_destroy((pthread_mutex_t*) hMutex);
+	if (OK != nResult) {
+		log_error("DestroyMutex: Failed to destroy the mutex. %s", strerror(nResult));
+
+		log_info("DestroyMutex: Done.");
+
+		return;
+	}
+
+	log_info("DestroyMutex: Resources for the mutex have been released back to the operating system.");
 
 	FreeMutex(hMutex);
 
