@@ -47,7 +47,8 @@ void FreeMutex(HMUTEX hMutex) {
 HMUTEX CreateMutex() {
 	log_info("In CreateMutex");
 
-	log_info("CreateMutex: Attempting to allocate system memory for mutex handle...");
+	log_info(
+			"CreateMutex: Attempting to allocate system memory for mutex handle...");
 
 	pthread_mutex_t* pMutex = (pthread_mutex_t*) malloc(
 			sizeof(pthread_mutex_t));
@@ -60,7 +61,8 @@ HMUTEX CreateMutex() {
 		return INVALID_HANDLE_VALUE;
 	}
 
-	log_debug("CreateMutex: %d B of memory allocated.", sizeof(pthread_mutex_t));
+	log_debug("CreateMutex: %d B of memory allocated.",
+			sizeof(pthread_mutex_t));
 
 	log_info("CreateMutex: Attempting to initialize mutex...");
 
