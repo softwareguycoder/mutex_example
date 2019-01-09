@@ -29,7 +29,7 @@ void thread_example_1(void) {
 		return;
 	}
 
-	log_info("thread_example_1: Successfully created thread with ID %lu.", thread_id);
+	log_info("thread_example_1: Created thread with ID %lu.", thread_id);
 
 	log_info("thread_example_1: Attempting to join thread with ID %lu...", thread_id);
 
