@@ -2,7 +2,7 @@
 #include "mutex_example.h"
 
 #include "my_thread_3.h"
-#include "mutex.h"
+#include "mutex_core.h"
 
 #define MY_THREAD_FUNCTION_3_DONE "my_thread_function_3: Done."
 #define MY_THREAD_FUNCTION_3_RESULTS "my_thread_function_3:\n\tThread ID: %d\tStatic: %d\tGlobal: %d"
@@ -34,7 +34,16 @@ void *my_thread_function_3(void *vargp)
 
 	log_info("my_thread_function_3: Attempting to get a mutually-exclusive lock on the global mutex...");
 
-	LockMutex(hGlobalMutex);
+	if (!LockMutex(hGlobalMutex))
+	{
+		log_error("my_thread_function_3: Failed to obtain mutually-exclusive lock.");
+
+		log_info("my_thread_function_3: Done.");
+
+		return NULL;
+	}
+
+	// Begin critical section
 	{
 		log_info("my_thread_function_3: Obtained mutually-exclusive lock.");
 
@@ -55,7 +64,16 @@ void *my_thread_function_3(void *vargp)
 
 		log_info("my_thread_function_3: Releasing the mutually-exclusive lock...");
 	}
-	UnlockMutex(hGlobalMutex);
+	// End critical section
+
+	if (!UnlockMutex(hGlobalMutex))
+	{
+		log_error("my_thread_function_3: Failed to release the mutually-exclusive lock.");
+
+		log_info("my_thread_function_3: Done.");;
+
+		return NULL;
+	}
 
 	log_info("my_thread_function_3: Mutually-exclusive lock released.");
 

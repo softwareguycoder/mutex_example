@@ -10,11 +10,14 @@
 #include <string.h>
 #include <time.h>
 
-// Exit codes
+// Exit and function return codes
+#ifndef OK
 #define OK		0		// Code to return to the operating system to indicate successful program termination
-#define ERROR	-1		// Code to return to the operating system to indicate an error condition
+#endif // OK
 
-#define INVALID_HANDLE_VALUE NULL
+#ifndef ERROR
+#define ERROR	-1		// Code to return to the operating system to indicate an error condition
+#endif // ERROR
 
 #define NUM_THREADS_FOR_EXAMPLE_3	2
 
@@ -22,6 +25,6 @@
 // INVALID_HANDLE_VALUE to be the same as NULL
 
 // Bringing in libraries defined by us
-#include <../../debug_core/debug_core/include/debug_core.h>
+#include <../../../debug_core/debug_core/include/debug_core.h>
 
 #endif //__STDAFX_H__
