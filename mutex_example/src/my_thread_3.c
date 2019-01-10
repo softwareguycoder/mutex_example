@@ -14,9 +14,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 // my_thread_function_3: Thread that changes global variables and uses args
 
-void *my_thread_function_3(void *vargp)
-{
-	log_info("In my_thread_function_3");
+void *my_thread_function_3(void *vargp) {
+	log_debug("In  my_thread_function_3");
 
 	log_info("my_thread_function_3: Checking whether there are any args...");
 
@@ -32,11 +31,12 @@ void *my_thread_function_3(void *vargp)
 	// NOTE: 'lock' is a global variable we've defined in mutex_example.h
 	// and implemented in mutex_example.c
 
-	log_info("my_thread_function_3: Attempting to get a mutually-exclusive lock on the global mutex...");
+	log_info(
+			"my_thread_function_3: Attempting to get a mutually-exclusive lock on the global mutex...");
 
-	if (!LockMutex(hGlobalMutex))
-	{
-		log_error("my_thread_function_3: Failed to obtain mutually-exclusive lock.");
+	if (!LockMutex(hGlobalMutex)) {
+		log_error(
+				"my_thread_function_3: Failed to obtain mutually-exclusive lock.");
 
 		log_info("my_thread_function_3: Done.");
 
@@ -47,30 +47,35 @@ void *my_thread_function_3(void *vargp)
 	{
 		log_info("my_thread_function_3: Obtained mutually-exclusive lock.");
 
-		log_info("my_thread_function_3: Counter before job start = %d", counter);
+		log_info("my_thread_function_3: Counter before job start = %d",
+				counter);
 
-		counter+=1;
+		counter += 1;
 
-		log_info("my_thread_function_3: Value of counter after increment = %d", counter);
+		log_info("my_thread_function_3: Value of counter after increment = %d",
+				counter);
 
 		log_info("Beginning job #%d...", counter);
 
 		log_info("my_thread_function_3: Doing work...");
 
 		/* This for loop is just here to make this thread last a long time */
-		for(unsigned long i = 0; i < LONG_MAX; i++);
+		for (unsigned long i = 0; i < LONG_MAX; i++)
+			;
 
 		log_info("my_thread_function_3: Job #%d is done.", counter);
 
-		log_info("my_thread_function_3: Releasing the mutually-exclusive lock...");
+		log_info(
+				"my_thread_function_3: Releasing the mutually-exclusive lock...");
 	}
 	// End critical section
 
-	if (!UnlockMutex(hGlobalMutex))
-	{
-		log_error("my_thread_function_3: Failed to release the mutually-exclusive lock.");
+	if (!UnlockMutex(hGlobalMutex)) {
+		log_error(
+				"my_thread_function_3: Failed to release the mutually-exclusive lock.");
 
-		log_info("my_thread_function_3: Done.");;
+		log_info("my_thread_function_3: Done.");
+		;
 
 		return NULL;
 	}

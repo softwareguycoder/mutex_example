@@ -24,7 +24,7 @@ HMUTEX hGlobalMutex;	// global mutex handle
 // main function - entry point
 
 int main(int argc, char* argv[]) {
-	log_info("In main");
+	log_debug("In main");
 
 	log_info("main: Seeding the random number generator...");
 

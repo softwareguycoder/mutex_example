@@ -12,7 +12,7 @@
 // my_thread_function_2: Thread that changes global variables and uses args
 
 void *my_thread_function_2(void *vargp) {
-	log_info("In my_thread_function_2");
+	log_debug("In my_thread_function_2");
 
 	/* In this thread function, we are expecting args to be passed in.
 	 * So, first we check whether vargp is NULL. If it is, then obviously,
@@ -21,7 +21,6 @@ void *my_thread_function_2(void *vargp) {
 
 	log_info(
 			"my_thread_function_2: Checking whether arguments have been passed...");
-
 
 	if (vargp == NULL) {
 		log_error(MY_THREAD_FUNCTION_2_ERROR_VARGP_NULL);
