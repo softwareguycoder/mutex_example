@@ -26,5 +26,7 @@
 
 // Bringing in libraries defined by us
 #include <../../../debug_core/debug_core/include/debug_core.h>
+#include <../../../threading_core/threading_core/include/threading_core.h>
+#include <../../../mutex_core/mutex_core/include/mutex_core.h>
 
 #endif //__STDAFX_H__
