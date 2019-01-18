@@ -14,7 +14,8 @@ int g = 0;
 int counter = 0;
 
 // Let us create a global array of thread IDs (for example #3)
-pthread_t thread_ids[NUM_THREADS_FOR_EXAMPLE_3];
+// which, in reality, is a thread pool
+HTHREAD threadPool[NUM_THREADS_FOR_EXAMPLE_3];
 
 // Let us create a global for the mutex lock object
 //pthread_mutex_t lock;

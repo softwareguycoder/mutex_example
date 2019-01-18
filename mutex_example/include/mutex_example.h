@@ -17,6 +17,7 @@ extern int counter;
 extern HMUTEX hGlobalMutex;
 
 // Let us create a global array of thread IDs (for example #3)
-extern pthread_t thread_ids[NUM_THREADS_FOR_EXAMPLE_3];
+// which, in reality, is a thread pool
+extern HTHREAD threadPool[NUM_THREADS_FOR_EXAMPLE_3];
 
 #endif	//__MUTEX_EXAMPLE_H__
