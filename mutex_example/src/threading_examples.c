@@ -66,7 +66,12 @@ void thread_example_2(void) {
 		log_info("thread_example_2: Attempting to create thread #%d",
 				nCurrentThread);
 
-		hThread = CreateThread(my_thread_function_2);
+		/* Pass the ordinal number of which thread this is to the thread procedure
+		 * itself by calling CreateThreadEx and filling in a reference to nCurrentThread
+		 * using the pUserState parameter of CreateThreadEx.
+		 */
+
+		hThread = CreateThreadEx(my_thread_function_2, (void*)&nCurrentThread);
 		if (INVALID_HANDLE_VALUE == hThread) {
 			log_error("thread_example_2: Failed to create thread #%d.",
 					nCurrentThread);
@@ -101,7 +106,7 @@ void thread_example_2(void) {
 		// undefined behavior WILL RESULT from using this hThread to, e.g., call
 		// WaitThreadEx etc.  So, don't do it! Only a CreateThread call can follow
 		// this function call.
-		hThread = (unsigned long int) rand();
+		hThread = (HTHREAD)((unsigned long int) rand());
 
 		log_info("thread_example_2: Thread #%d has terminated.",
 				nCurrentThread);
