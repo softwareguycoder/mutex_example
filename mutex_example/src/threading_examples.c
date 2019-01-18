@@ -54,7 +54,7 @@ void thread_example_2(void) {
 	log_info("thread_example_2: Attempting to create %d threads...",
 			NUM_THREADS);
 
-	pthread_t tid;
+	HTHREAD hThread = INVALID_HANDLE_VALUE;
 
 	for (int i = 0; i < NUM_THREADS; i++) {
 		int nCurrentThread = i + 1;
@@ -62,24 +62,23 @@ void thread_example_2(void) {
 		log_info("thread_example_2: Attempting to create thread #%d",
 				nCurrentThread);
 
-		int nResult = pthread_create(&tid, NULL, my_thread_function_2,
-				(void*) &tid);
-		if (OK != nResult) {
-			log_error("thread_example_2: Failed to create thread #%d. %s",
-					nCurrentThread, strerror(nResult));
+		hThread = CreateThread(my_thread_function_2);
+		if (INVALID_HANDLE_VALUE == hThread) {
+			log_error("thread_example_2: Failed to create thread #%d.",
+					nCurrentThread);
 
 			log_info("thread_example_2: Done.");
 
 			return;
 		}
 
-		log_info("thread_example_2: Created thread #%d with thread ID %lu.",
-				nCurrentThread, tid);
+		log_info("thread_example_2: Created thread #%d with thread handle at address %x.",
+				nCurrentThread, hThread);
 
 		log_info("thread_example_2: Attempting to join thread #%d...",
 				nCurrentThread);
 
-		nResult = pthread_join(tid, NULL);
+		int nResult = WaitThread(hThread);
 		if (OK != nResult) {
 			log_error("thread_example_2: Failed to join thread #%d. %s",
 					nCurrentThread, strerror(nResult));
@@ -87,7 +86,12 @@ void thread_example_2(void) {
 			log_info("thread_example_2: Done.");
 		}
 
-		tid = (unsigned long int) rand();// RANDOMIZE the thread ID before creating the next thread
+		// Even though it may seem superfluous, we call DestroyThread here
+		// so that we have a guarantee that the thread handle has been invalidated
+		// since we re-use it in a loop.
+		DestroyThread(hThread);
+
+		hThread = (unsigned long int) rand();// RANDOMIZE the thread ID before creating the next thread
 
 		log_info("thread_example_2: Thread #%d has terminated.",
 				nCurrentThread);
