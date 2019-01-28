@@ -5,6 +5,7 @@
 	<projects>
 		<project>debug_core</project>
 		<project>mutex_core</project>
+		<project>threading_core</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
